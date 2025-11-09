@@ -1,5 +1,4 @@
 from fastapi import APIRouter, Depends, HTTPException, status
-from typing import List
 from sqlalchemy.orm import Session
 from src.db import get_db
 from src.services.product_service import ProductService, BusinessRuleViolation

@@ -4,22 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="975fc613-5a4f-4217-ac29-58d0870eb797" name="Changes" comment="Upgrade to match specs">
+    <list default="true" id="975fc613-5a4f-4217-ac29-58d0870eb797" name="Changes" comment="Update files">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/products.db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/db.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/products.db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/repositories/product_repository.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/repositories/product_repository.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/requirements.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/routers/banned_phrases.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/routers/banned_phrases.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/routers/products.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/routers/products.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/product_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/product_service.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tests/test_integration.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tests/test_ui_integration.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/schemas.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,7 +87,7 @@
       <option name="presentableId" value="Default" />
       <updated>1762419096246</updated>
       <workItem from="1762419097306" duration="4177000" />
-      <workItem from="1762667817877" duration="4879000" />
+      <workItem from="1762667817877" duration="9134000" />
     </task>
     <task id="LOCAL-00001" summary="Add project files">
       <option name="closed" value="true" />
@@ -115,7 +105,23 @@
       <option name="project" value="LOCAL" />
       <updated>1762669259759</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Upgrade to match specs and cleanup">
+      <option name="closed" value="true" />
+      <created>1762672987908</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1762672987908</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Update files">
+      <option name="closed" value="true" />
+      <created>1762673097535</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1762673097535</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -124,10 +130,12 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Add project files" />
     <MESSAGE value="Upgrade to match specs" />
-    <option name="LAST_COMMIT_MESSAGE" value="Upgrade to match specs" />
+    <MESSAGE value="Upgrade to match specs and cleanup" />
+    <MESSAGE value="Update files" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update files" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/ZTP_LAB_01$main.coverage" NAME="main Coverage Results" MODIFIED="1762670618678" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
+    <SUITE FILE_PATH="coverage/ZTP_LAB_01$main.coverage" NAME="main Coverage Results" MODIFIED="1762673312432" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
     <SUITE FILE_PATH="coverage/ZTP_LAB_01$.coverage" NAME=" Coverage Results" MODIFIED="1762667880206" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/ZTP_LAB_01$product_service.coverage" NAME="product_service Coverage Results" MODIFIED="1762670540562" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/services" />
   </component>
