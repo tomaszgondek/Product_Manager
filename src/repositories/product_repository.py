@@ -1,7 +1,6 @@
 from sqlalchemy.orm import Session
-from src.models import Product, ProductHistory, BannedPhrase
-from typing import List, Optional, Dict, Any
-from datetime import datetime
+from typing import Optional, List, Dict, Any
+from src.models import Product, BannedPhrase
 
 class ProductRepository:
     def __init__(self, db: Session):
@@ -21,31 +20,32 @@ class ProductRepository:
         self.db.add(product)
         self.db.commit()
         self.db.refresh(product)
-        self._add_history(product.id, "CREATED", None, _serialize_product(product))
         return product
 
     def update(self, product: Product, changes: Dict[str, Any]) -> Product:
-        previous = _serialize_product(product)
         for k, v in changes.items():
             setattr(product, k, v)
-        from datetime import datetime
-        product.updated_at = datetime.utcnow()
-        self.db.add(product)
         self.db.commit()
         self.db.refresh(product)
-        self._add_history(product.id, "UPDATED", previous, _serialize_product(product))
         return product
 
     def delete(self, product: Product) -> None:
-        prev = _serialize_product(product)
         self.db.delete(product)
         self.db.commit()
-        self._add_history(None, "DELETED", prev, None)
 
-    def _add_history(self, product_id: Optional[int], change_type: str, previous: Optional[Dict], current: Optional[Dict]) -> None:
-        hist = ProductHistory(product_id=product_id, change_type=change_type, previous=previous, current=current)
-        self.db.add(hist)
-        self.db.commit()
+    def serialize(self, product: Product) -> dict:
+        return {
+            "id": product.id,
+            "name": product.name,
+            "description": product.description,
+            "price": product.price,
+            "quantity": product.quantity,
+            "category": product.category,
+            "active": product.active,
+            "created_at": product.created_at.isoformat() if product.created_at else None,
+            "updated_at": product.updated_at.isoformat() if product.updated_at else None,
+        }
+
 
 class BannedPhraseRepository:
     def __init__(self, db: Session):
@@ -58,27 +58,14 @@ class BannedPhraseRepository:
         return self.db.query(BannedPhrase).filter(BannedPhrase.phrase == phrase).first()
 
     def create(self, phrase: str) -> BannedPhrase:
-        obj = BannedPhrase(phrase=phrase)
-        self.db.add(obj)
+        bp = BannedPhrase(phrase=phrase)
+        self.db.add(bp)
         self.db.commit()
-        self.db.refresh(obj)
-        return obj
+        self.db.refresh(bp)
+        return bp
 
     def delete(self, phrase_id: int) -> None:
         obj = self.db.query(BannedPhrase).filter(BannedPhrase.id == phrase_id).first()
         if obj:
             self.db.delete(obj)
             self.db.commit()
-
-def _serialize_product(product: Product) -> dict:
-    return {
-        "id": product.id,
-        "name": product.name,
-        "description": product.description,
-        "price": product.price,
-        "quantity": product.quantity,
-        "category": product.category,
-        "active": product.active,
-        "created_at": product.created_at.isoformat() if product.created_at else None,
-        "updated_at": product.updated_at.isoformat() if product.updated_at else None,
-    }
