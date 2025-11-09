@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session
-from models import Product, ProductHistory, BannedPhrase
+from src.models import Product, ProductHistory, BannedPhrase
 from typing import List, Optional, Dict, Any
 from datetime import datetime
 
@@ -21,7 +21,6 @@ class ProductRepository:
         self.db.add(product)
         self.db.commit()
         self.db.refresh(product)
-        # history
         self._add_history(product.id, "CREATED", None, _serialize_product(product))
         return product
 
@@ -29,6 +28,7 @@ class ProductRepository:
         previous = _serialize_product(product)
         for k, v in changes.items():
             setattr(product, k, v)
+        from datetime import datetime
         product.updated_at = datetime.utcnow()
         self.db.add(product)
         self.db.commit()
@@ -70,8 +70,6 @@ class BannedPhraseRepository:
             self.db.delete(obj)
             self.db.commit()
 
-# helper
-
 def _serialize_product(product: Product) -> dict:
     return {
         "id": product.id,
@@ -79,6 +77,7 @@ def _serialize_product(product: Product) -> dict:
         "description": product.description,
         "price": product.price,
         "quantity": product.quantity,
+        "category": product.category,
         "active": product.active,
         "created_at": product.created_at.isoformat() if product.created_at else None,
         "updated_at": product.updated_at.isoformat() if product.updated_at else None,

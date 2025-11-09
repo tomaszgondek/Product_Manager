@@ -1,9 +1,9 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from typing import List
 from sqlalchemy.orm import Session
-from db import get_db
-from schemas import ProductCreate, ProductOut, ProductUpdate, ProductHistoryOut
-from services.product_service import ProductService, BusinessRuleViolation
+from src.db import get_db
+from src.schemas import ProductCreate, ProductOut, ProductUpdate, ProductHistoryOut
+from src.services.product_service import ProductService, BusinessRuleViolation
 
 router = APIRouter(prefix="/api/v1/products", tags=["products"])
 
@@ -13,7 +13,8 @@ def create_product(payload: ProductCreate, db: Session = Depends(get_db)):
     try:
         prod = svc.create_product(payload.dict())
     except BusinessRuleViolation as e:
-        raise HTTPException(status_code=400, detail=str(e))
+        detail = e.args[0] if e.args else str(e)
+        raise HTTPException(status_code=400, detail=detail)
     return prod
 
 @router.get("/", response_model=List[ProductOut])
@@ -35,7 +36,8 @@ def update_product(product_id: int, payload: ProductUpdate, db: Session = Depend
     try:
         prod = svc.update_product(product_id, payload.dict(exclude_unset=True))
     except BusinessRuleViolation as e:
-        raise HTTPException(status_code=400, detail=str(e))
+        detail = e.args[0] if e.args else str(e)
+        raise HTTPException(status_code=400, detail=detail)
     if not prod:
         raise HTTPException(status_code=404, detail="Product not found")
     return prod

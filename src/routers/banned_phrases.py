@@ -1,9 +1,9 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from typing import List
 from sqlalchemy.orm import Session
-from db import get_db
-from repositories.product_repository import BannedPhraseRepository
-from schemas import BannedPhraseCreate, BannedPhraseOut
+from src.db import get_db
+from src.repositories.product_repository import BannedPhraseRepository
+from src.schemas import BannedPhraseCreate, BannedPhraseOut
 
 router = APIRouter(prefix="/api/v1/banned-phrases", tags=["banned_phrases"])
 

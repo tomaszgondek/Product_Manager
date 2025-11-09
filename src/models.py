@@ -1,8 +1,7 @@
 from sqlalchemy import Column, Integer, String, Float, Boolean, DateTime, ForeignKey, JSON
 from sqlalchemy.orm import relationship
 from datetime import datetime
-from db import Base
-
+from src.db import Base
 
 class Product(Base):
     __tablename__ = "products"
@@ -11,26 +10,23 @@ class Product(Base):
     description = Column(String, nullable=True)
     price = Column(Float, nullable=False, default=0.0)
     quantity = Column(Integer, nullable=False, default=0)
+    category = Column(String, nullable=False)
     active = Column(Boolean, default=True)
     created_at = Column(DateTime, default=datetime.utcnow)
     updated_at = Column(DateTime, default=datetime.utcnow)
 
-
-history = relationship("ProductHistory", back_populates="product", cascade="all, delete-orphan")
-
+    history = relationship("ProductHistory", back_populates="product", cascade="all, delete-orphan")
 
 class ProductHistory(Base):
     __tablename__ = "product_history"
     id = Column(Integer, primary_key=True, index=True)
     product_id = Column(Integer, ForeignKey("products.id"), nullable=True)
     timestamp = Column(DateTime, default=datetime.utcnow)
-    change_type = Column(String, nullable=False) # CREATED, UPDATED, DELETED
+    change_type = Column(String, nullable=False)  # CREATED, UPDATED, DELETED
     previous = Column(JSON, nullable=True)
     current = Column(JSON, nullable=True)
 
-
-product = relationship("Product", back_populates="history")
-
+    product = relationship("Product", back_populates="history")
 
 class BannedPhrase(Base):
     __tablename__ = "banned_phrases"
