@@ -1,0 +1,13 @@
+version: '3.9'
+
+services:
+  fastapi:
+    build: .
+    container_name: products_api
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./src:/app/src
+      - ./products.db:/app/products.db
+    environment:
+      - PYTHONUNBUFFERED=1
