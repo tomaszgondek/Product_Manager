@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Edit product</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="p-4">
+<div class="container">
+    <h1 class="mb-4">Edit product #{{ product.id }}</h1>
+
+    {% if errors %}
+    <div class="alert alert-danger">
+        <ul class="mb-0">
+        {% for field, msg in errors.items() %}
+            <li><strong>{{ field }}:</strong> {{ msg }}</li>
+        {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
+    <form method="post" action="/ui/edit/{{ product.id }}" class="row g-2">
+        <div class="col-md-3"><input name="name" class="form-control" placeholder="Name" required value="{{ product.name }}"></div>
+        <div class="col-md-2">
+            <select name="category" class="form-select" required>
+                {% for c in ['Electronics','Books','Clothing'] %}
+                <option value="{{ c }}" {% if product.category == c %}selected{% endif %}>{{ c }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-md-2"><input name="price" type="number" step="0.01" class="form-control" placeholder="Price" required value="{{ product.price }}"></div>
+        <div class="col-md-2"><input name="quantity" type="number" min="0" class="form-control" placeholder="Quantity" required value="{{ product.quantity }}"></div>
+        <div class="col-md-3"><button class="btn btn-primary w-100">Save</button></div>
+        <div class="col-12"><input name="description" class="form-control mt-2" placeholder="Description" value="{{ product.description }}"></div>
+    </form>
+
+    <a href="/ui" class="btn btn-link mt-3">Back</a>
+</div>
+</body>
+</html>
